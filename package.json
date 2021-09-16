@@ -4,7 +4,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "serve": "vite preview"
+    "serve": "vite preview",
+    "ct": "yarn eslint * && yarn tsc && yarn cz"
   },
   "dependencies": {
     "@chakra-ui/react": "^1.6.7",
@@ -21,11 +22,19 @@
     "@typescript-eslint/eslint-plugin": "^4.27.0",
     "@typescript-eslint/parser": "^4.27.0",
     "@vitejs/plugin-react-refresh": "^1.3.1",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^7.28.0",
     "eslint-plugin-import": "^2.23.4",
     "eslint-plugin-import-helpers": "^1.1.0",
     "typescript": "^4.3.2",
     "vite": "^2.5.4",
     "vite-tsconfig-paths": "^3.3.14"
-  }
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "license": "MIT"
 }
