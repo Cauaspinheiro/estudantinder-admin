@@ -1,9 +1,9 @@
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import React from 'react'
 
-import PrimaryButton from 'ui/components/atoms/primary_button'
-import SignInput from 'ui/components/atoms/sign_input'
 import PageContainer from 'ui/components/templates/page_container'
+
+import SignInForm from './components/sign_in_form'
 
 const SignInPage: React.FC = () => {
   return (
@@ -92,20 +92,7 @@ const SignInPage: React.FC = () => {
             </Heading>
           </Box>
 
-          <Box
-            as="form"
-            display="flex"
-            flexDirection="column"
-            gridRowGap="8"
-            width="100%"
-            maxW="md"
-          >
-            <SignInput type="email" placeholder="E-mail" name="email" />
-
-            <SignInput type="password" placeholder="Senha" name="password" />
-
-            <PrimaryButton>Continuar</PrimaryButton>
-          </Box>
+          <SignInForm />
         </Box>
 
         <Text fontSize="sm" color="black">
@@ -133,7 +120,7 @@ const SignInPage: React.FC = () => {
         height="100%"
         width="10vw"
         minH="100vh"
-      ></Box>
+      />
     </PageContainer>
   )
 }
