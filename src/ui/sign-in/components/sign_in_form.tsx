@@ -1,22 +1,19 @@
 import { Box, useToast } from '@chakra-ui/react'
 import React from 'react'
 
+import { useAuthContext } from 'app/auth/auth_context'
 import PrimaryButton from 'ui/components/atoms/primary_button'
 import SignInput from 'ui/components/atoms/sign_input'
 
 const SignInForm: React.FC = () => {
   const toast = useToast()
+  const { login } = useAuthContext()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const {
-      email: { value: email },
-      password: { value: password },
-    } = e.target as unknown as {
-      email: HTMLInputElement
-      password: HTMLInputElement
-    }
+    const email = e.currentTarget.email.value?.trim()
+    const password = e.currentTarget.password.value?.trim()
 
     if (!email.trim()) {
       return toast({
@@ -45,13 +42,7 @@ const SignInForm: React.FC = () => {
       })
     }
 
-    toast({
-      title: 'Login realizado com sucesso!',
-      status: 'success',
-      position: 'top',
-      duration: 5000,
-      isClosable: true,
-    })
+    login({ email, password })
   }
 
   return (
