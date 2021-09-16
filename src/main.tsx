@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-import App from './app'
-import AppProvider from './app/provider'
-import './main.css'
+import App from 'app'
+import AppProvider from 'app/provider'
+
+import 'main.css'
 
 ReactDOM.render(
   <React.StrictMode>

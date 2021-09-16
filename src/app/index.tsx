@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 
-import SignInPage from '../ui/sign-in/sign_in_page'
+import SignInPage from 'ui/sign-in/sign_in_page'
 
 const App: FC = () => {
   return <SignInPage />

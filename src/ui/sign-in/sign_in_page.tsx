@@ -1,9 +1,9 @@
 import { Box, Heading, Link, Text } from '@chakra-ui/react'
 import React from 'react'
 
-import PrimaryButton from '../components/atoms/primary_button'
-import SignInput from '../components/atoms/sign_input'
-import PageContainer from '../components/templates/page_container'
+import PrimaryButton from 'ui/components/atoms/primary_button'
+import SignInput from 'ui/components/atoms/sign_input'
+import PageContainer from 'ui/components/templates/page_container'
 
 const SignInPage: React.FC = () => {
   return (
@@ -12,7 +12,7 @@ const SignInPage: React.FC = () => {
         backgroundImage="url(/assets/login-bg.svg)"
         backgroundRepeat="no-repeat"
         backgroundSize="contain"
-        bgPosition="top"
+        bgPosition="top left"
         height="100%"
         width="65vw"
         minH="100vh"

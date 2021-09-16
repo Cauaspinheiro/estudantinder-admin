@@ -1,13 +1,13 @@
 {
   "root": true,
   "parser": "@typescript-eslint/parser",
-  "plugins": ["react", "@typescript-eslint", "eslint-plugin-import-helpers"],
+  "plugins": ["@typescript-eslint", "eslint-plugin-import-helpers"],
   "extends": [
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "no-console": "error",
     "import/no-anonymous-default-export": "off",
 
@@ -15,7 +15,11 @@
       "warn",
       {
         "newlinesBetween": "always",
-        "groups": ["module", ["/src/"], ["parent", "sibling", "index"]],
+        "groups": [
+          ["module", "/@chakra/"],
+          ["/app/", "/domain/", "/infra/", "/ui/"],
+          ["parent", "sibling", "index"]
+        ],
         "alphabetize": { "order": "asc", "ignoreCase": true }
       }
     ]
