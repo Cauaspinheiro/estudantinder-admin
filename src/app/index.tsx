@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 
-import SignInPage from 'ui/sign-in/sign_in_page'
-
 import { useAuthContext } from './auth/auth_context'
+import AuthenticatedRoutes from './router/authenticated_routes'
+import UnauthenticatedRoutes from './router/unauthenticated_routes'
 
 const App: React.FC = () => {
   const { isLoading, token, restore } = useAuthContext()
@@ -16,10 +16,10 @@ const App: React.FC = () => {
   }
 
   if (token) {
-    return <div>Welcome to the dashboard!</div>
+    return <AuthenticatedRoutes />
   }
 
-  return <SignInPage />
+  return <UnauthenticatedRoutes />
 }
 
 export default App
