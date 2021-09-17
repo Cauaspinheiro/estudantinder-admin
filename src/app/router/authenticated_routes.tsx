@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom'
 
 import NotFoundPage from 'ui/404/not_found_page'
+import DashboardPage from 'ui/dashboard/dashboard_page'
 import SignInPage from 'ui/sign-in/sign_in_page'
 
 const AuthenticatedRoutes: React.FC = () => {
@@ -9,7 +10,7 @@ const AuthenticatedRoutes: React.FC = () => {
     <BrowserRouter>
       <Switch>
         {/* Authenticated routes*/}
-        <Route path="/dashboard" component={() => <h1>dashboard</h1>} />
+        <Route path="/dashboard" component={DashboardPage} />
         <Route path="/sign-in" component={SignInPage} />
 
         {/* Redirection */}
