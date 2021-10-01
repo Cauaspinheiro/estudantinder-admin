@@ -11,7 +11,7 @@ const SignOutPage: React.FC = () => {
   useEffect(() => {
     logout()
 
-    history.push('/')
+    history.replace('/')
   }, [])
 
   return <div />

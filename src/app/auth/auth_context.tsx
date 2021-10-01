@@ -13,15 +13,20 @@ import loginUseCase from './use_cases/login_use_case'
 import logoutUseCase from './use_cases/logout_use_case'
 import restoreSessionUseCase from './use_cases/restore_session_use_case'
 
+export enum AuthContextStatus {
+  loading,
+  authenticated,
+  unauthenticated,
+}
+
 interface State {
-  token?: string | null
-  isLoading: boolean
+  status: AuthContextStatus
 }
 
 interface Actions {
-  login: (data: AuthLogin) => void
+  login: (data: AuthLogin) => Promise<AuthContextStatus>
   logout: () => void
-  restore: () => void
+  restore: () => AuthContextStatus
 }
 
 export type AuthContext = State & Actions
@@ -41,53 +46,62 @@ export function useAuthContext(): AuthContext {
 export const AuthProvider: React.FC = ({ children }) => {
   const toast = useToast()
 
-  const [token, setToken] = useState<string | null>()
-
-  const isLoading = useMemo(() => token === undefined, [token])
+  const [status, setStatus] = useState<AuthContextStatus>(
+    AuthContextStatus.loading
+  )
 
   const login = useCallback(
     async (data: AuthLogin) => {
       try {
-        const tokenData = await loginUseCase(data)
+        await loginUseCase(data)
 
-        setToken(tokenData)
+        setStatus(AuthContextStatus.authenticated)
 
-        toast({
-          title: 'Login',
-          description: 'Login successful',
-          status: 'success',
-        })
+        return AuthContextStatus.authenticated
       } catch (error) {
         toast({
           title: 'Algo deu errado!',
           description: String(error),
           status: 'error',
         })
+
+        setStatus(AuthContextStatus.unauthenticated)
+
+        return AuthContextStatus.unauthenticated
       }
     },
     [toast]
   )
 
   const logout = useCallback(() => {
-    setToken(null)
+    setStatus(AuthContextStatus.unauthenticated)
     logoutUseCase()
   }, [])
 
   const restore = useCallback(() => {
     const tokenData = restoreSessionUseCase()
 
-    setToken(tokenData)
+    setStatus(
+      tokenData
+        ? AuthContextStatus.authenticated
+        : AuthContextStatus.unauthenticated
+    )
+
+    if (tokenData === null) {
+      return AuthContextStatus.unauthenticated
+    }
+
+    return AuthContextStatus.authenticated
   }, [])
 
   const value = useMemo<AuthContext>(
     () => ({
-      token,
-      isLoading,
+      status,
       login,
       logout,
       restore,
     }),
-    [token, isLoading, login, logout, restore]
+    [status, login, logout, restore]
   )
 
   return <Context.Provider value={value}>{children}</Context.Provider>

@@ -1,21 +1,21 @@
 import React, { useEffect } from 'react'
 
-import { useAuthContext } from './auth/auth_context'
+import { AuthContextStatus, useAuthContext } from './auth/auth_context'
 import AuthenticatedRoutes from './router/routes/authenticated_routes'
 import UnauthenticatedRoutes from './router/routes/unauthenticated_routes'
 
 const App: React.FC = () => {
-  const { isLoading, token, restore } = useAuthContext()
+  const { status, restore } = useAuthContext()
 
   useEffect(() => {
     restore()
   }, [])
 
-  if (isLoading) {
+  if (status === AuthContextStatus.loading) {
     return <div>Loading...</div>
   }
 
-  if (token) {
+  if (status === AuthContextStatus.authenticated) {
     return <AuthenticatedRoutes />
   }
 
