@@ -10,10 +10,10 @@ const UnauthenticatedRoutes: React.FC = () => {
   return (
     <BaseRouter>
       {/* Unauthenticated routes*/}
-      <Route path={HOME_PATH} component={SignInPage} />
+      <Route path={HOME_PATH} component={SignInPage} exact />
 
       {/* Redirection */}
-      <Redirect path="/" to={HOME_PATH} exact />
+      <Redirect path="/" to={HOME_PATH} />
     </BaseRouter>
   )
 }

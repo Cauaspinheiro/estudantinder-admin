@@ -3,5 +3,3 @@ export interface SidebarItemData {
   label: string
   path: string
 }
-
-export type SidebarData = Record<string, SidebarItemData[]>

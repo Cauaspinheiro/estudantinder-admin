@@ -1,73 +1,70 @@
-import { Box, Heading } from '@chakra-ui/react'
+import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
-import { FiFlag, FiSettings, FiLogOut, FiUsers } from 'react-icons/fi'
-import { MdDashboard } from 'react-icons/md'
+import { FiFlag, FiHome, FiLogOut, FiUsers } from 'react-icons/fi'
+import { MdShowChart } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
+import { useAuthContext } from 'app/auth/auth_context'
 import {
   ANALYTICS_PATH,
   HOME_PATH,
   REPORTS_PATH,
-  SETTINGS_PATH,
   USERS_PATH,
 } from 'app/router/paths'
-import { SidebarData } from 'ui/@types/sidebar_data'
+import { SidebarItemData } from 'ui/@types/sidebar_data'
 
-import SidebarGroup from '../molecules/sidebar_group'
+import SidebarItem from '../atoms/sidebar_item'
 
-const items: SidebarData = {
-  geral: [
-    {
-      label: 'Dashboard',
-      icon: MdDashboard,
-      path: ANALYTICS_PATH,
-    },
-    {
-      label: 'Usuários',
-      icon: FiUsers,
-      path: USERS_PATH,
-    },
-    {
-      label: 'Denúncias',
-      icon: FiFlag,
-      path: REPORTS_PATH,
-    },
-  ],
-  usuário: [
-    {
-      label: 'Configurações',
-      icon: FiSettings,
-      path: SETTINGS_PATH,
-    },
-    {
-      label: 'Sair',
-      icon: FiLogOut,
-      path: '/sign-out',
-    },
-  ],
-}
+const items: SidebarItemData[] = [
+  {
+    icon: FiHome,
+    label: 'Home',
+    path: HOME_PATH,
+  },
+  {
+    label: 'Relatórios',
+    icon: MdShowChart,
+    path: ANALYTICS_PATH,
+  },
+
+  {
+    label: 'Estudantes',
+    icon: FiUsers,
+    path: USERS_PATH,
+  },
+
+  {
+    label: 'Denúncias',
+    icon: FiFlag,
+    path: REPORTS_PATH,
+  },
+]
 
 const Sidebar: React.FC = () => {
   const history = useHistory()
+
+  const { logout } = useAuthContext()
 
   const onClick = (item: string) => {
     history.push(item)
   }
 
   return (
-    <Box
+    <Flex
+      flexDirection="column"
       as="aside"
       width="var(--sidebar-width)"
-      background="white"
+      minWidth="264px"
+      background="purple.900"
       height="100vh"
-      py="8"
-      px="5"
+      pt="8"
+      pb="2"
       position="fixed"
     >
       <Heading
-        color="purple.500"
+        color="white"
         textTransform="uppercase"
-        fontSize="1.5rem"
+        fontSize="2xl"
         fontWeight="black"
         letterSpacing="wide"
         cursor="pointer"
@@ -76,18 +73,64 @@ const Sidebar: React.FC = () => {
         Estudantinder
       </Heading>
 
-      <Box display="flex" flexDir="column" gridRowGap="6" width="100%" mt="10">
-        {Object.entries(items).map(([key, value]) => (
-          <SidebarGroup
-            key={key}
-            onItemClick={onClick}
-            activePath={history.location.pathname}
-            items={value}
-            title={key}
-          />
+      <Box h="24" />
+
+      <Flex flexDir="column" gridRowGap="4" width="100%" pr="4">
+        {items.map((item) => (
+          <SidebarItem
+            key={item.label + item.path}
+            onClick={() => onClick(item.path)}
+            isActive={history.location.pathname === item.path}
+            icon={item.icon}
+          >
+            {item.label}
+          </SidebarItem>
         ))}
-      </Box>
-    </Box>
+      </Flex>
+
+      <Flex
+        flex="1"
+        alignItems="center"
+        justify="flex-end"
+        flexDirection="column"
+      >
+        <Flex
+          alignItems="center"
+          px="8"
+          h="16"
+          w="full"
+          justify="space-between"
+          color="white"
+        >
+          <Text fontFamily="heading" fontSize="md">
+            Nome Admin
+          </Text>
+
+          <Box
+            onClick={logout}
+            cursor="pointer"
+            transition="color 0.3s"
+            _hover={{
+              color: 'whiteAlpha.800',
+            }}
+          >
+            <FiLogOut />
+          </Box>
+        </Flex>
+
+        <Flex
+          alignItems="center"
+          px="8"
+          h="10"
+          w="full"
+          color="gray"
+          fontSize="xs"
+          fontFamily="mono"
+        >
+          v3.6.2 - Development
+        </Flex>
+      </Flex>
+    </Flex>
   )
 }
 

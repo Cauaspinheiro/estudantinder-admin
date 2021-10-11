@@ -13,19 +13,21 @@ export interface SidebarItemProps {
 const SidebarItem: React.FC<SidebarItemProps> = (props) => {
   return (
     <Button
-      colorScheme="white"
-      onClick={props.isActive ? () => null : props.onClick}
       width="100%"
-      background={props.isActive ? 'purple.500' : 'transparent'}
-      color={props.isActive ? 'white' : 'blackAlpha.600'}
+      height="44px"
+      colorScheme="white"
+      color={props.isActive ? 'green.400' : 'white'}
+      bgColor={props.isActive ? 'white' : 'transparent'}
+      onClick={props.isActive ? () => null : props.onClick}
       display="flex"
+      pl="8"
       alignItems="center"
-      borderRadius="base"
+      borderRadius="none"
+      borderRightRadius="10px"
       justifyContent="flex-start"
-      gridColumnGap="3"
-      p="4"
+      gridColumnGap="4"
       _hover={{
-        color: !props.isActive ? 'purple.500' : undefined,
+        color: !props.isActive ? 'whiteAlpha.800' : undefined,
       }}
       _focus={{
         outline: 'none',
@@ -34,7 +36,7 @@ const SidebarItem: React.FC<SidebarItemProps> = (props) => {
     >
       <props.icon size={20} />
 
-      <Text fontFamily="heading" as="span" fontSize="sm" fontWeight="semibold">
+      <Text fontFamily="heading" as="span" fontSize="sm" fontWeight="bold">
         {props.children}
       </Text>
     </Button>

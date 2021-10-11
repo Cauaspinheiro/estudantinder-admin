@@ -9,8 +9,10 @@ export default extendTheme({
     black: '#2d2d2d',
     purple: {
       500: '#6D36DA',
+      900: '#0C061C',
     },
     green: {
+      400: '#0fad58',
       500: '#10A454',
     },
   },
