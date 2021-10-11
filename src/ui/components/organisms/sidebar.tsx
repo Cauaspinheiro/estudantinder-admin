@@ -52,6 +52,14 @@ const Sidebar: React.FC = () => {
     history.push(item)
   }
 
+  const getEnv = () => {
+    if (__DEV__) return 'development'
+
+    // TODO: add staging checking env
+
+    return 'production'
+  }
+
   return (
     <Flex
       flexDirection="column"
@@ -130,7 +138,7 @@ const Sidebar: React.FC = () => {
           fontSize="xs"
           fontFamily="mono"
         >
-          v3.6.2 - Development
+          v{__VERSION__} - {getEnv()}
         </Flex>
       </Flex>
     </Flex>
