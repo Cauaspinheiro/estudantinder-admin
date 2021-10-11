@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Redirect } from 'react-router-dom'
 
+import { UserContextProvider } from 'app/user/user_context'
 import AnalyticsPage from 'ui/analytics/analytics_page'
 import HomePage from 'ui/home/home_page'
 import ReportsPage from 'ui/reports/reports_page'
@@ -19,21 +20,23 @@ import {
 
 const AuthenticatedRoutes: React.FC = () => {
   return (
-    <BaseRouter>
-      {/* Authenticated routes*/}
-      <Route path={SIGN_OUT_PATH} component={SignOutPage} />
+    <UserContextProvider>
+      <BaseRouter>
+        {/* Authenticated routes*/}
+        <Route path={SIGN_OUT_PATH} component={SignOutPage} />
 
-      <Route path={HOME_PATH} exact component={HomePage} />
+        <Route path={HOME_PATH} exact component={HomePage} />
 
-      <Route path={USERS_PATH} exact component={UsersPage} />
-      <Route path={USER_PATH} component={UsersPage} />
+        <Route path={USERS_PATH} exact component={UsersPage} />
+        <Route path={USER_PATH} component={UsersPage} />
 
-      <Route path={REPORTS_PATH} component={ReportsPage} />
-      <Route path={ANALYTICS_PATH} component={AnalyticsPage} />
+        <Route path={REPORTS_PATH} component={ReportsPage} />
+        <Route path={ANALYTICS_PATH} component={AnalyticsPage} />
 
-      {/* Redirection */}
-      <Redirect path="/" to={HOME_PATH} exact />
-    </BaseRouter>
+        {/* Redirection */}
+        <Redirect path="/" to={HOME_PATH} exact />
+      </BaseRouter>
+    </UserContextProvider>
   )
 }
 

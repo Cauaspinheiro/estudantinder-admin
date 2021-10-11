@@ -12,7 +12,7 @@ const App: React.FC = () => {
   }, [])
 
   if (status === AuthContextStatus.loading) {
-    return <div>Loading...</div>
+    return <div>Loading...</div> // TODO: Make a loading component
   }
 
   if (status === AuthContextStatus.authenticated) {

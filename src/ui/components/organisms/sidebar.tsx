@@ -11,6 +11,7 @@ import {
   REPORTS_PATH,
   USERS_PATH,
 } from 'app/router/paths'
+import { useUserContext } from 'app/user/user_context'
 import { SidebarItemData } from 'ui/@types/sidebar_data'
 
 import SidebarItem from '../atoms/sidebar_item'
@@ -44,6 +45,8 @@ const Sidebar: React.FC = () => {
   const history = useHistory()
 
   const { logout } = useAuthContext()
+
+  const user = useUserContext()
 
   const onClick = (item: string) => {
     history.push(item)
@@ -103,7 +106,7 @@ const Sidebar: React.FC = () => {
           color="white"
         >
           <Text fontFamily="heading" fontSize="md">
-            Nome Admin
+            {user?.name}
           </Text>
 
           <Box
