@@ -65,7 +65,7 @@ const Sidebar: React.FC = () => {
       flexDirection="column"
       as="aside"
       width="var(--sidebar-width)"
-      minWidth="264px"
+      minWidth="var(--sidebar-min-width)"
       background="purple.900"
       height="100vh"
       pt="8"
