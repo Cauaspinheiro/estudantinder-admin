@@ -22,7 +22,7 @@ const PageWithSidebarTemplate: React.FC = ({ children, ...rest }) => {
         justifyContent="center"
         alignItems="center"
         display="flex"
-        bg="#FCFAFF"
+        bg="#FAFDFF"
         {...rest}
       >
         {children}
