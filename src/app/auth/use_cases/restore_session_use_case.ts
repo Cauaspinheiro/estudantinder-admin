@@ -4,7 +4,9 @@ import api from 'infra/config/api'
 export default function restoreSessionUseCase(): string | null {
   const token = AuthStorageRepository.get()
 
-  api.defaults.headers.common.Authorization = `Bearer ${token}`
+  if (token) {
+    api.defaults.headers.common.Authorization = `Bearer ${token}`
+  }
 
   return token ?? null
 }
