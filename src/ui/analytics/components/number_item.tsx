@@ -30,10 +30,12 @@ const AnalyticsNumberItem: React.FC<AnalyticsNumberItemProps> = (props) => {
     >
       <Box
         position="absolute"
-        h="full"
+        h="calc(100% + 2px)"
         w="8px"
         bg={itemHover ? 'green.400' : 'transparent'}
         left="0"
+        marginLeft="-1px"
+        marginTop="-1px"
         borderLeftRadius="5px"
         transition="background 0.3s"
       />
