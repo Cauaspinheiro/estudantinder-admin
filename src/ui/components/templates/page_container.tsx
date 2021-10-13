@@ -12,7 +12,7 @@ const PageContainer: React.FC<PageContainerProps> = ({
       textAlign="center"
       fontSize="xl"
       minH="100vh"
-      alignItems="center"
+      alignItems="flex-start"
       justifyContent="center"
       display="flex"
       {...props}
