@@ -3,7 +3,8 @@ import React from 'react'
 
 import PageWithSidebarTemplate from 'ui/components/templates/page_with_sidebar_template'
 
-import AnalyticsNumberItem from './components/number_item'
+import AnalyticsNumberItem from './components/atoms/number_item'
+import SubjectsTable from './components/organisms/subjects_table'
 
 const AnalyticsPage: React.FC = () => {
   return (
@@ -28,6 +29,12 @@ const AnalyticsPage: React.FC = () => {
 
         <Flex direction="row" justifyContent="flex-start" w="full">
           <AnalyticsNumberItem title="Total de alunos cadastrados" value={12} />
+        </Flex>
+
+        <Box h="16" />
+
+        <Flex direction="row" justifyContent="flex-start" w="full">
+          <SubjectsTable />
         </Flex>
       </Flex>
     </PageWithSidebarTemplate>
