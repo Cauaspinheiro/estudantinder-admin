@@ -4,17 +4,17 @@ import React from 'react'
 import PageWithSidebarTemplate from 'ui/components/templates/page_with_sidebar_template'
 
 import AnalyticsNumberItem from './components/atoms/number_item'
+import FiltersTable from './components/organisms/filters_table'
 import SubjectsTable from './components/organisms/subjects_table'
 
 const AnalyticsPage: React.FC = () => {
   return (
     <PageWithSidebarTemplate>
       <Flex
-        bg="white"
         direction="column"
         flex="1"
         px="16"
-        pt="14"
+        py="14"
         h="full"
         minH="100vh"
         w="full"
@@ -35,6 +35,12 @@ const AnalyticsPage: React.FC = () => {
 
         <Flex direction="row" justifyContent="flex-start" w="full">
           <SubjectsTable />
+        </Flex>
+
+        <Box h="16" />
+
+        <Flex direction="row" justifyContent="flex-start" w="full">
+          <FiltersTable />
         </Flex>
       </Flex>
     </PageWithSidebarTemplate>
