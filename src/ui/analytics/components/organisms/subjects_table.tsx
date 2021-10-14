@@ -22,6 +22,7 @@ const SubjectsTable: React.FC = () => {
         border="1px solid #E5E5E5"
         borderRadius="5px"
         colorScheme="green"
+        boxShadow="15px 10px 20px rgba(0, 0, 0, 0.08)"
       >
         <Thead>
           <Tr>
