@@ -1,4 +1,4 @@
-import { Box, Heading, Link, Text } from '@chakra-ui/react'
+import { Box, Heading, Link, Text, Image } from '@chakra-ui/react'
 import React from 'react'
 
 import PageContainer from 'ui/components/templates/page_container'
@@ -20,18 +20,10 @@ const SignInPage: React.FC = () => {
         flexDirection="column"
         alignItems="flex-start"
         padding="40px 8%"
+        gridGap="12px"
       >
-        <Heading
-          as="h1"
-          fontSize="3xl"
-          textTransform="uppercase"
-          color="white"
-          fontWeight="black"
-          lineHeight="54px"
-          letterSpacing="wider"
-        >
-          Estudantinder
-        </Heading>
+        <Image src="/assets/logo.svg" alt="logo" />
+
         <Heading
           as="h2"
           fontSize="xl"
@@ -56,7 +48,7 @@ const SignInPage: React.FC = () => {
         paddingTop="24"
         zIndex="2"
       >
-        <div></div>
+        <div />
 
         <Box
           display="flex"
