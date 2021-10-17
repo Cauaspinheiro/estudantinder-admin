@@ -55,7 +55,7 @@ const Sidebar: React.FC = () => {
   const getEnv = () => {
     if (__VITE_DEV__) return 'development'
 
-    // TODO: add staging checking env
+    if (VITE_VERCEL_ENV !== 'production') return 'staging'
 
     return 'production'
   }
