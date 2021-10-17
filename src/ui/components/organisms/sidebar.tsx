@@ -53,7 +53,7 @@ const Sidebar: React.FC = () => {
   }
 
   const getEnv = () => {
-    if (__DEV__) return 'development'
+    if (__VITE_DEV__) return 'development'
 
     // TODO: add staging checking env
 

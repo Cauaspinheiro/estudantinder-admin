@@ -7,6 +7,6 @@ export default defineConfig({
   plugins: [reactRefresh(), tsconfigPaths()],
   define: {
     __VERSION__: JSON.stringify(process.env.npm_package_version),
-    __DEV__: process.env.NODE_ENV !== 'production',
+    __VITE_DEV__: process.env.NODE_ENV !== 'production',
   },
 })
