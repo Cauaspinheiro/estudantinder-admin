@@ -36,7 +36,12 @@ const SidebarItem: React.FC<SidebarItemProps> = (props) => {
     >
       <props.icon size={20} />
 
-      <Text fontFamily="heading" as="span" fontSize="sm" fontWeight="bold">
+      <Text
+        fontFamily="heading"
+        as="span"
+        fontSize="sm"
+        fontWeight={props.isActive ? 'bold' : 'medium'}
+      >
         {props.children}
       </Text>
     </Button>

@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
-import { FiFlag, FiHome, FiLogOut, FiUsers } from 'react-icons/fi'
-import { MdShowChart } from 'react-icons/md'
+import { FiFlag, FiLogOut, FiUsers } from 'react-icons/fi'
+import { MdHome, MdShowChart } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
 import { useAuthContext } from 'app/auth/auth_context'
@@ -18,7 +18,7 @@ import SidebarItem from '../atoms/sidebar_item'
 
 const items: SidebarItemData[] = [
   {
-    icon: FiHome,
+    icon: MdHome,
     label: 'Home',
     path: HOME_PATH,
   },
