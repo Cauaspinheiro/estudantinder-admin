@@ -15,5 +15,8 @@ export default extendTheme({
       400: '#0fad58',
       500: '#10A454',
     },
+    red: {
+      600: '#D84444',
+    },
   },
 })
