@@ -52,14 +52,6 @@ const Sidebar: React.FC = () => {
     history.push(item)
   }
 
-  const getEnv = () => {
-    if (__VITE_DEV__) return 'development'
-
-    if (VITE_VERCEL_ENV !== 'production') return 'staging'
-
-    return 'production'
-  }
-
   return (
     <Flex
       flexDirection="column"
@@ -138,7 +130,7 @@ const Sidebar: React.FC = () => {
           fontSize="xs"
           fontFamily="mono"
         >
-          v{__VERSION__} - {getEnv()}
+          v{__VERSION__} - {__ENV__}
         </Flex>
       </Flex>
     </Flex>
