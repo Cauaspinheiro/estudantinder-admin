@@ -79,16 +79,24 @@ const Sidebar: React.FC = () => {
       <Box h="24" />
 
       <Flex flexDir="column" gridRowGap="4" width="100%" pr="4">
-        {items.map((item) => (
-          <SidebarItem
-            key={item.label + item.path}
-            onClick={() => onClick(item.path)}
-            isActive={history.location.pathname === item.path}
-            icon={item.icon}
-          >
-            {item.label}
-          </SidebarItem>
-        ))}
+        {items.map((item) => {
+          const path = history.location.pathname
+
+          const folder = item.path.replaceAll('/dashboard', '')
+
+          const isActive = folder ? path.includes(folder) : path === item.path
+
+          return (
+            <SidebarItem
+              key={item.label + item.path}
+              onClick={() => onClick(item.path)}
+              isActive={isActive}
+              icon={item.icon}
+            >
+              {item.label}
+            </SidebarItem>
+          )
+        })}
       </Flex>
 
       <Flex

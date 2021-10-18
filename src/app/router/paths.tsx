@@ -5,4 +5,6 @@ export const HOME_PATH = '/dashboard'
 export const USERS_PATH = '/dashboard/students'
 export const USER_PATH = '/dashboard/students/:id'
 export const REPORTS_PATH = '/dashboard/reports'
+export const TARGET_REPORT_PATH = '/dashboard/reports/:id'
+
 export const ANALYTICS_PATH = '/dashboard/analytics'

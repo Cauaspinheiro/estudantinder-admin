@@ -2,7 +2,7 @@ import { Flex, Text, Image } from '@chakra-ui/react'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import { USER_PATH } from 'app/router/paths'
+import { TARGET_REPORT_PATH } from 'app/router/paths'
 import PrimaryRedButton from 'ui/components/atoms/primary_red_button'
 import SecondaryRedButton from 'ui/components/atoms/secondary_red_button'
 
@@ -21,7 +21,7 @@ const ReportItem: React.FC = () => {
       gridGap="2"
     >
       <Flex justify="flex-end">
-        <Link to={USER_PATH.replace(':id', '2')}>
+        <Link to={TARGET_REPORT_PATH.replace(':id', '2')}>
           <Text
             fontFamily="heading"
             fontWeight="bold"

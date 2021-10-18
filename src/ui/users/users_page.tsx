@@ -1,20 +1,19 @@
-import { Box, Flex, Image, Input, Text, useToast } from '@chakra-ui/react'
+import { Box, Flex, Image, Input, Text } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import { FiSearch } from 'react-icons/fi'
+import { useHistory } from 'react-router-dom'
 
+import { USER_PATH } from 'app/router/paths'
 import PageContainer from 'ui/components/templates/page_container'
 import PageWithSidebarTemplate from 'ui/components/templates/page_with_sidebar_template'
 
 const UsersPage: React.FC = () => {
-  const toast = useToast()
+  const history = useHistory()
 
   const [value, setValue] = useState('')
 
   const handleSubmit = () => {
-    toast({
-      title: value,
-      status: 'success',
-    })
+    history.push(USER_PATH.replace(':id', value))
   }
 
   return (
