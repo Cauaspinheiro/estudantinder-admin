@@ -5,6 +5,13 @@ import PageContainer from 'ui/components/templates/page_container'
 import PageWithSidebarTemplate from 'ui/components/templates/page_with_sidebar_template'
 
 import HomePageItem from './components/home_page_item'
+import {
+  DeployLinks,
+  DesignLinks,
+  DocumentationLinks,
+  GithubLinks,
+  OthersLinks,
+} from './home_page_link_data'
 
 const HomePage: React.FC = () => {
   return (
@@ -33,7 +40,7 @@ const HomePage: React.FC = () => {
             color="black"
             letterSpacing="wide"
           >
-            Link para as plataformas abaixo contendo arquivos referentes ao
+            Links para as plataformas abaixo contendo arquivos referentes ao
             desenvolvimento do projeto.
           </Text>
         </Flex>
@@ -41,17 +48,42 @@ const HomePage: React.FC = () => {
         <Grid
           w="full"
           flex="1"
-          gridTemplateAreas={`"a b c" "d e c"`}
-          rowGap="16"
+          gridTemplateColumns="repeat(3, 1fr)"
+          rowGap="20"
           columnGap="12"
         >
-          <HomePageItem gridArea="a" title="Repositórios" techTitle="Github" />
+          <HomePageItem
+            img="/assets/links/github.svg"
+            title="Repositórios"
+            techTitle="Github"
+            links={GithubLinks}
+          />
 
-          <HomePageItem gridArea="b" title="Design" techTitle="Figma" />
+          <HomePageItem
+            img="/assets/links/figma.svg"
+            title="Design"
+            techTitle="Figma"
+            links={DesignLinks}
+          />
 
-          <HomePageItem gridArea="c" title="Documentação" techTitle="Notion" />
-          <HomePageItem gridArea="d" title="Sites" techTitle="Landing Page" />
-          <HomePageItem gridArea="e" title="Outros" techTitle="Outros sites" />
+          <HomePageItem
+            img="/assets/links/notion.svg"
+            title="Documentação"
+            techTitle="Notion"
+            links={DocumentationLinks}
+          />
+
+          <HomePageItem
+            img="/assets/links/default.svg"
+            techTitle="Deploys"
+            links={DeployLinks}
+          />
+
+          <HomePageItem
+            img="/assets/links/default.svg"
+            techTitle="Outros sites"
+            links={OthersLinks}
+          />
         </Grid>
       </PageContainer>
     </PageWithSidebarTemplate>
