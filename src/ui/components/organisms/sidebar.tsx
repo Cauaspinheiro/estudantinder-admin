@@ -5,6 +5,7 @@ import { MdHome, MdShowChart } from 'react-icons/md'
 import { useHistory } from 'react-router-dom'
 
 import { useAuthContext } from 'app/auth/auth_context'
+import Env from 'app/env'
 import {
   ANALYTICS_PATH,
   HOME_PATH,
@@ -138,7 +139,7 @@ const Sidebar: React.FC = () => {
           fontSize="xs"
           fontFamily="mono"
         >
-          v{__VERSION__} - {__ENV__}
+          v{__VERSION__} - {Env.name}
         </Flex>
       </Flex>
     </Flex>
