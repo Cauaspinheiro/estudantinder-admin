@@ -3,12 +3,23 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 
 import { TARGET_REPORT_PATH } from 'app/router/paths'
+import Report, { ReportLabels } from 'domain/report/report'
 import PrimaryRedButton from 'ui/components/atoms/primary_red_button'
 import SecondaryRedButton from 'ui/components/atoms/secondary_red_button'
 
 import ReportItemText from './report_item_text'
 
-const ReportItem: React.FC = () => {
+export interface ReportItemProps {
+  report: Report
+  handleDeleteReport: (report: Report) => void
+  handleDeleteUser: (report: Report) => void
+}
+
+const ReportItem: React.FC<ReportItemProps> = ({ report, ...props }) => {
+  const customReports = report.reports.find(
+    (report) => report.type === 'custom' && report.dates.length > 0
+  )
+
   return (
     <Flex
       direction="column"
@@ -21,7 +32,7 @@ const ReportItem: React.FC = () => {
       gridGap="2"
     >
       <Flex justify="flex-end">
-        <Link to={TARGET_REPORT_PATH.replace(':id', '54')}>
+        <Link to={TARGET_REPORT_PATH.replace(':id', String(report.user.id))}>
           <Text
             fontFamily="heading"
             fontWeight="bold"
@@ -42,7 +53,7 @@ const ReportItem: React.FC = () => {
           width="214px"
           height="264px"
           borderRadius="5px"
-          src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
+          src={report.user.photos?.[0] || 'https://via.placeholder.com/200'}
         />
 
         <Flex direction="column" alignItems="flex-start">
@@ -52,43 +63,53 @@ const ReportItem: React.FC = () => {
             fontSize="lg"
             color="black"
           >
-            User foi reportado
+            {report.user.name} foi reportado
           </Text>
 
           <Flex gridGap="6px" direction="column" py="2" alignItems="flex-start">
-            <ReportItemText label="Perfil falso" value={8} />
-            <ReportItemText label="Spam ou conteúdo comercial" value={1} />
-            <ReportItemText label="Hackeado" value={2} />
-            <ReportItemText label="Conteúdo inapropriado" value={6} />
-            <ReportItemText label="Intenções de suicídio" value={12} />
+            {report.reports.map((report) => {
+              if (!report.dates.length) return
 
-            <Text
-              fontFamily="body"
-              fontSize="sm"
-              fontWeight="medium"
-              color="gray.600"
-            >
-              Denúncias personalizadas:
-            </Text>
+              if (report.type === 'custom') return
 
-            <Text
-              fontFamily="monospace"
-              bg="#F5F5F5"
-              fontSize="sm"
-              color="black"
-              textAlign="left"
-              alignSelf="flex-start"
-              px="4"
-              py="2"
-              borderRadius="5px"
-              my="2"
-              mr="4"
-            >
-              Lorem ipsum dolor sit amet consectetur, adipisicing elit. Aut
-              error iste in inventore iure repellendus recusandae nulla nam
-              distinctio facere? Illum ipsum id quos quasi laborum fuga et, esse
-              iste?
-            </Text>
+              return (
+                <ReportItemText
+                  key={report.type}
+                  label={ReportLabels[report.type]}
+                  value={report.dates.length}
+                />
+              )
+            })}
+
+            {customReports && (
+              <Text
+                fontFamily="body"
+                fontSize="sm"
+                fontWeight="medium"
+                color="gray.600"
+              >
+                Denúncias personalizadas:
+              </Text>
+            )}
+
+            {customReports?.descriptions.map((value) => (
+              <Text
+                key={value}
+                fontFamily="monospace"
+                bg="#F5F5F5"
+                fontSize="sm"
+                color="black"
+                textAlign="left"
+                alignSelf="flex-start"
+                px="4"
+                py="2"
+                borderRadius="5px"
+                my="2"
+                mr="4"
+              >
+                {value}
+              </Text>
+            ))}
           </Flex>
         </Flex>
       </Flex>
@@ -101,9 +122,11 @@ const ReportItem: React.FC = () => {
         maxW="440px"
         margin="0 auto"
       >
-        <PrimaryRedButton onClick={() => 0}>Excluir Usuário</PrimaryRedButton>
+        <PrimaryRedButton onClick={() => props.handleDeleteUser(report)}>
+          Excluir Usuário
+        </PrimaryRedButton>
 
-        <SecondaryRedButton onClick={() => 0}>
+        <SecondaryRedButton onClick={() => props.handleDeleteReport(report)}>
           Excluir Denúncia
         </SecondaryRedButton>
       </Flex>

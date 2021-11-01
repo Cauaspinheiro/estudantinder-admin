@@ -37,4 +37,18 @@ export default class StudentRepository {
       throw error
     }
   }
+
+  static async ban(id: string): Promise<void> {
+    try {
+      await api.delete(`/admins/users/${id}`)
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        if (error.response?.status === 404) {
+          throw 'USUÁRIO NÃO ENCONTRADO'
+        }
+      }
+
+      throw error
+    }
+  }
 }
