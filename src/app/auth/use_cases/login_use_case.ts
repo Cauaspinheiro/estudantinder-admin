@@ -8,7 +8,7 @@ export default async function loginUseCase(data: AuthLogin): Promise<string> {
 
   AuthStorageRepository.insert({
     token: response.jwt,
-    expireDate: new Date(response.expireDate),
+    expireDate: new Date(response.expire_date),
   })
 
   api.defaults.headers.common.Authorization = `Bearer ${response.jwt}`

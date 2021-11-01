@@ -11,7 +11,7 @@ export interface GetUserRepositoryDTO {
 export default class UserRepository {
   static async getUser(): Promise<GetUserRepositoryDTO> {
     try {
-      const { data } = await api.get('/admins')
+      const { data } = await api.get('/admins/me')
 
       return data
     } catch (error) {

@@ -34,6 +34,7 @@ const HomePageLink: React.FC<HomePageLinkProps> = (props) => {
     >
       <Link
         href={props.href}
+        isExternal
         fontFamily="heading"
         fontSize="sm"
         fontWeight="semibold"

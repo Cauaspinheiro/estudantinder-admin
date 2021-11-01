@@ -21,7 +21,7 @@ const ReportItem: React.FC = () => {
       gridGap="2"
     >
       <Flex justify="flex-end">
-        <Link to={TARGET_REPORT_PATH.replace(':id', '2')}>
+        <Link to={TARGET_REPORT_PATH.replace(':id', '54')}>
           <Text
             fontFamily="heading"
             fontWeight="bold"
@@ -103,7 +103,9 @@ const ReportItem: React.FC = () => {
       >
         <PrimaryRedButton onClick={() => 0}>Excluir Usuário</PrimaryRedButton>
 
-        <SecondaryRedButton onClick={() => 0}>Excluir Denúncia</SecondaryRedButton>
+        <SecondaryRedButton onClick={() => 0}>
+          Excluir Denúncia
+        </SecondaryRedButton>
       </Flex>
     </Flex>
   )

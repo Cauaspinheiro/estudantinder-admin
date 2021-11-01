@@ -2,13 +2,51 @@ import { Divider, Flex, Grid, Heading, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 import { FiBookmark, FiBookOpen, FiFlag, FiImage, FiType } from 'react-icons/fi'
 
+import Student from 'domain/student/student'
 import RemoveUserAlert from 'ui/components/atoms/remove_user_alert'
 import PageContainer from 'ui/components/templates/page_container'
 
 import SubjectItem from './components/subject_item'
 import UserItemHeading from './components/user_item_heading'
 
-const BaseUserPage: React.FC = () => {
+export interface BaseUserPageProps {
+  student: Student
+}
+
+export enum GENDERS {
+  FEMALE = 0,
+  MALE = 1,
+}
+
+export enum SHIFTS {
+  MORNING = 1,
+  AFTERNOON = 2,
+}
+
+const BaseUserPage: React.FC<BaseUserPageProps> = ({ student }) => {
+  const getUserAge = (birthday: string) => {
+    const ageDifMs = Date.now() - new Date(birthday).getTime()
+
+    const ageDate = new Date(ageDifMs)
+
+    return Math.abs(ageDate.getUTCFullYear() - 1970)
+  }
+
+  const getGender = (gender: string | number) => {
+    if (isNaN(gender as number)) return gender
+
+    if (GENDERS.FEMALE === Number(gender)) return 'Feminino'
+    if (GENDERS.MALE === Number(gender)) return 'Masculino'
+
+    return gender
+  }
+
+  const getShift = (shift: number) => {
+    if (SHIFTS.MORNING === shift) return 'Manhã'
+    if (SHIFTS.AFTERNOON === shift) return 'Tarde'
+    return String(shift)
+  }
+
   return (
     <PageContainer
       gridGap="16"
@@ -34,14 +72,14 @@ const BaseUserPage: React.FC = () => {
           fontWeight="semibold"
           color="black"
         >
-          User 1, 17
+          {student.name}, {getUserAge(student.birthDate)}
         </Heading>
 
         <Image
           width="214px"
           height="264px"
           borderRadius="5px"
-          src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
+          src={student.photos?.[0]}
         />
 
         <Flex
@@ -58,9 +96,7 @@ const BaseUserPage: React.FC = () => {
           <UserItemHeading icon={FiType} name="Biografia" />
 
           <Text fontFamily="body" fontSize="md" color="black">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua Ut enim
-            ad minim veniam.
+            {student.bio}
           </Text>
         </Flex>
 
@@ -74,40 +110,19 @@ const BaseUserPage: React.FC = () => {
           <UserItemHeading icon={FiImage} name="Fotos" />
 
           <Grid templateColumns="repeat(3, 1fr)" gap="4">
-            <Image
-              width="100%"
-              height="100%"
-              borderRadius="5px"
-              src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
-            />
+            {student.photos?.map((photo, index) => {
+              if (index == 0) return undefined
 
-            <Image
-              width="100%"
-              height="100%"
-              borderRadius="5px"
-              src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
-            />
-
-            <Image
-              width="100%"
-              height="100%"
-              borderRadius="5px"
-              src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
-            />
-
-            <Image
-              width="100%"
-              height="100%"
-              borderRadius="5px"
-              src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
-            />
-
-            <Image
-              width="100%"
-              height="100%"
-              borderRadius="5px"
-              src="https://res.cloudinary.com/adamaugustinsky/image/upload/v1632240779/v1rgirb6c0b1ahcthmpw.jpg"
-            />
+              return (
+                <Image
+                  key={photo}
+                  width="100%"
+                  height="100%"
+                  borderRadius="5px"
+                  src={photo}
+                />
+              )
+            })}
           </Grid>
         </Flex>
 
@@ -123,7 +138,7 @@ const BaseUserPage: React.FC = () => {
             textTransform="capitalize"
             color="black"
           >
-            Masculino
+            {getGender(student.gender)}
           </Text>
         </Flex>
 
@@ -157,9 +172,11 @@ const BaseUserPage: React.FC = () => {
               textAlign="left"
               w="full"
             >
-              <Text>ITB Belval - Informática</Text>
+              <Text>
+                {student.school.address} - {student.course.name}
+              </Text>
 
-              <Text>Turno: Manhã</Text>
+              <Text>Turno: {getShift(student.shift)}</Text>
             </Flex>
 
             <Flex
@@ -170,9 +187,9 @@ const BaseUserPage: React.FC = () => {
               textAlign="left"
               w="50%"
             >
-              <Text>Série: 2º ano</Text>
+              <Text>Série: {student.schoolYear}º ano</Text>
 
-              <Text>Sala: F</Text>
+              <Text>Sala: {student.classroom}</Text>
             </Flex>
           </Flex>
         </Flex>
@@ -189,11 +206,9 @@ const BaseUserPage: React.FC = () => {
           <UserItemHeading icon={FiBookOpen} name="Matérias com afinidade" />
 
           <Flex w="full" justifyContent="space-around" px="14" gridGap="8">
-            <SubjectItem>artes</SubjectItem>
-
-            <SubjectItem>física</SubjectItem>
-
-            <SubjectItem>inglês</SubjectItem>
+            {student.subjects.map((subject) => (
+              <SubjectItem key={subject.id}>{subject.name}</SubjectItem>
+            ))}
           </Flex>
         </Flex>
       </Flex>

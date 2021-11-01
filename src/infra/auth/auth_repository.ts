@@ -5,13 +5,13 @@ import api from 'infra/config/api'
 
 export interface SignResponseAuthRepositoryDTO {
   jwt: string
-  expireDate: string
+  expire_date: string
 }
 
 export default class AuthRepository {
   static async login(data: AuthLogin): Promise<SignResponseAuthRepositoryDTO> {
     try {
-      const response = await api.post('/admins/login', {
+      const response = await api.post('/admins/session', {
         email: data.email,
         password: data.password,
       })
