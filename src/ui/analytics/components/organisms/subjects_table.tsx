@@ -1,11 +1,17 @@
 import { Flex, Heading, Table, Tbody, Thead, Tr } from '@chakra-ui/react'
 import React from 'react'
 
+import SubjectStatistic from 'domain/analytics/subjects_statistic'
+
 import SubjectsTableHead from '../atoms/subjects_table_head'
 import SubjectsTableLabel from '../atoms/subjects_table_label'
 import SubjectsTableValue from '../atoms/subjects_table_value'
 
-const SubjectsTable: React.FC = () => {
+export interface SubjectsTableProps {
+  data: SubjectStatistic[]
+}
+
+const SubjectsTable: React.FC<SubjectsTableProps> = ({ data }) => {
   return (
     <Flex flexDir="column" align="flex-start" gridGap="10" w="full">
       <Heading
@@ -34,32 +40,20 @@ const SubjectsTable: React.FC = () => {
         </Thead>
 
         <Tbody>
-          <Tr>
-            <SubjectsTableLabel img="https://res.cloudinary.com/adamaugustinsky/image/upload/v1631024626/dxebbesw01x3rvjr8k0o.png">
-              Matemática
-            </SubjectsTableLabel>
-
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-          </Tr>
-
-          <Tr>
-            <SubjectsTableLabel img="https://res.cloudinary.com/adamaugustinsky/image/upload/v1631024626/dxebbesw01x3rvjr8k0o.png">
-              Inglês
-            </SubjectsTableLabel>
-
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-          </Tr>
-
-          <Tr>
-            <SubjectsTableLabel img="https://res.cloudinary.com/adamaugustinsky/image/upload/v1631024626/dxebbesw01x3rvjr8k0o.png">
-              Educação Física
-            </SubjectsTableLabel>
-
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-            <SubjectsTableValue>18.990</SubjectsTableValue>
-          </Tr>
+          {data.map((value) => (
+            <Tr key={value.subject.id}>
+              <SubjectsTableLabel
+                img={
+                  value.subject.photo ||
+                  'https://res.cloudinary.com/adamaugustinsky/image/upload/v1631024626/dxebbesw01x3rvjr8k0o.png'
+                }
+              >
+                {value.subject.name}
+              </SubjectsTableLabel>
+              <SubjectsTableValue>{value.usersSearching}</SubjectsTableValue>
+              <SubjectsTableValue>{value.usersPreferred}</SubjectsTableValue>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </Flex>

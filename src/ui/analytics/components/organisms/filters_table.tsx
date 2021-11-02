@@ -1,9 +1,15 @@
 import { Flex, Heading } from '@chakra-ui/react'
 import React from 'react'
 
+import FilterUsage from 'domain/analytics/filter_usage'
+
 import FiltersTableRow from '../molecules/filters_table_row'
 
-const FiltersTable: React.FC = () => {
+export interface FiltersTableProps {
+  data: FilterUsage[]
+}
+
+const FiltersTable: React.FC<FiltersTableProps> = ({ data }) => {
   return (
     <Flex flexDir="column" align="flex-start" gridGap="10" w="full">
       <Heading
@@ -28,13 +34,14 @@ const FiltersTable: React.FC = () => {
         boxShadow="0px 10px 15px rgba(0, 0, 0, 0.1)"
         border="1px solid #EFEFEF"
       >
-        <FiltersTableRow label="Escolas" percentage={0.64} value="20.432" />
-
-        <FiltersTableRow label="Curso" percentage={0.86} value="108.256" />
-
-        <FiltersTableRow label="Série" percentage={0.22} value="3.323" />
-
-        <FiltersTableRow label="Matérias" percentage={0.42} value="13.323" />
+        {data.map((value) => (
+          <FiltersTableRow
+            key={value.name}
+            label={value.name}
+            percentage={value.percent}
+            value={value.total}
+          />
+        ))}
       </Flex>
     </Flex>
   )

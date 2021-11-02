@@ -5,7 +5,7 @@ import FiltersTablePercentage from '../atoms/filters_table_percentage'
 
 export interface FiltersTableRowProps {
   label: string
-  value: string
+  value: number
   percentage: number
 }
 
