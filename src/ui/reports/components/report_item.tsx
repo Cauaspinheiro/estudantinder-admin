@@ -53,6 +53,8 @@ const ReportItem: React.FC<ReportItemProps> = ({ report, ...props }) => {
           width="214px"
           height="264px"
           borderRadius="5px"
+          objectFit="cover"
+          objectPosition="center"
           src={report.user.photos?.[0] || 'https://via.placeholder.com/200'}
         />
 

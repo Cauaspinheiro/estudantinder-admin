@@ -79,6 +79,8 @@ const BaseUserPage: React.FC<BaseUserPageProps> = ({ student }) => {
           width="214px"
           height="264px"
           borderRadius="5px"
+          objectFit="cover"
+          objectPosition="center"
           src={student.photos?.[0]}
         />
 
@@ -205,7 +207,7 @@ const BaseUserPage: React.FC<BaseUserPageProps> = ({ student }) => {
         >
           <UserItemHeading icon={FiBookOpen} name="Matérias com afinidade" />
 
-          <Flex w="full" justifyContent="space-around" px="14" gridGap="8">
+          <Flex w="full" justifyContent="space-around" px="12" gridGap="6">
             {student.subjects.map((subject) => (
               <SubjectItem key={subject.id}>{subject.name}</SubjectItem>
             ))}

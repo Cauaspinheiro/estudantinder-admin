@@ -26,7 +26,7 @@ interface State {
 interface Actions {
   login: (data: AuthLogin) => Promise<AuthContextStatus>
   logout: () => void
-  restore: () => AuthContextStatus
+  restore: () => Promise<AuthContextStatus>
 }
 
 export type AuthContext = State & Actions
@@ -78,8 +78,8 @@ export const AuthProvider: React.FC = ({ children }) => {
     logoutUseCase()
   }, [])
 
-  const restore = useCallback(() => {
-    const tokenData = restoreSessionUseCase()
+  const restore = useCallback(async () => {
+    const tokenData = await restoreSessionUseCase()
 
     setStatus(
       tokenData

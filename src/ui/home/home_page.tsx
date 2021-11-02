@@ -1,6 +1,7 @@
 import { Flex, Grid, Heading, Text } from '@chakra-ui/react'
 import React from 'react'
 
+import { useUserContext } from 'app/user/user_context'
 import PageContainer from 'ui/components/templates/page_container'
 import PageWithSidebarTemplate from 'ui/components/templates/page_with_sidebar_template'
 
@@ -14,6 +15,8 @@ import {
 } from './home_page_link_data'
 
 const HomePage: React.FC = () => {
+  const user = useUserContext()
+
   return (
     <PageWithSidebarTemplate>
       <PageContainer
@@ -30,7 +33,7 @@ const HomePage: React.FC = () => {
       >
         <Flex direction="column" gridGap="8">
           <Heading color="black" fontSize="3xl" fontWeight="extrabold">
-            Olá, Cauã Pinheiro! 👋
+            Olá, {user?.name}! 👋
           </Heading>
 
           <Text

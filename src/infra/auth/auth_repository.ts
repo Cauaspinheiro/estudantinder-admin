@@ -25,4 +25,16 @@ export default class AuthRepository {
       throw new Error('Algo deu errado!')
     }
   }
+
+  static async validate(): Promise<void> {
+    try {
+      await api.post('/admins/me/session')
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        throw new Error(error.response?.data.message)
+      }
+
+      throw new Error('Algo deu errado!')
+    }
+  }
 }
